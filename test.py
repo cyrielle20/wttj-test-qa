@@ -8,6 +8,7 @@ def list_profession_id(profession_file):
     file = open(profession_file, "r")
     reader=csv.DictReader(file)
     profession_ids = {}
+
     for row in reader:
         if (row['category_name'] not in profession_ids.keys()):
             profession_ids[row['category_name']] = [row['id']]
@@ -18,10 +19,12 @@ def list_profession_id(profession_file):
 
 
 def count_jobs_by_profession_and_contract(profession_file, job_file):
+
     profession_ids=list_profession_id(profession_file)
     file = open(job_file, "r")
     reader=csv.DictReader(file)
     profession_id_contract_type_count = {}
+
     for row in reader:
         for key, values in profession_ids.items():
             if row['profession_id'] in values:
@@ -39,6 +42,7 @@ def count_jobs_by_profession_and_contract(profession_file, job_file):
 
 
 def print_jobs_by_profession_and_contract(profession_file, job_file):
+
         map = count_jobs_by_profession_and_contract(profession_file, job_file)
         for key, values in map.items():
             total = 0
